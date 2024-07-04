@@ -1,0 +1,52 @@
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.grades = {}
+
+    def add_grade(self, subject, grade):
+        if subject in self.grades:
+            self.grades[subject].append(grade)
+        else:
+            self.grades[subject] = [grade]
+
+    def calculate_average_grade(self):
+        total_sum = 0.0
+        total_count = 0
+
+        for subject, grades in self.grades.items():
+            subject_total = sum(grades)
+            subject_count = len(grades)
+            print(f"{subject}: {grades}")
+            subject_average = subject_total / subject_count
+            print(f"Average for {subject}: {subject_average:.2f}\n")
+
+            total_sum += subject_total
+            total_count += subject_count
+
+        overall_average = total_sum / total_count
+        print(f"Overall Average Grade: {overall_average:.2f}")
+
+      
+if __name__ == "__main__":
+    student_name = input("Enter student's name: ")
+    student = Student(student_name)
+
+    while True:
+        print("\nChoose an option:")
+        print("1. Add Grade")
+        print("2. Calculate Average Grade")
+        print("3. Exit")
+
+        choice = input("Enter your choice (1/2/3): ")
+
+        if choice == '1':
+            subject = input("Enter subject or assignment name: ")
+            grade = float(input("Enter grade: "))
+            student.add_grade(subject, grade)
+        elif choice == '2':
+            student.calculate_average_grade()
+        elif choice == '3':
+            print("Exiting program.")
+            break
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
